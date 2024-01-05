@@ -74,15 +74,14 @@ func (s *UserService) Get() routey.HandlerFunc {
 		}
 
 		m := models.User{Model: models.Model{ID: uint(i)}}
-		e, err := s.cache.Contains(string(rune(m.ID)))
+		e, err := s.cache.Contains(fmt.Sprintf("%d", m.ID))
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 			return
 		}
 
 		if e {
-			fmt.Println("fetched from cache")
-			err := s.cache.Get(&m, string(rune(m.ID)))
+			err := s.cache.Get(&m, fmt.Sprintf("%d", m.ID))
 			if err != nil {
 				c.Status(http.StatusBadRequest)
 				return
@@ -105,7 +104,7 @@ func (s *UserService) Get() routey.HandlerFunc {
 		}
 		r := m
 
-		_, err = s.cache.Set(&m, string(rune(m.ID)))
+		_, err = s.cache.Set(&m, fmt.Sprintf("%d", m.ID))
 		if err != nil {
 			log.Printf("%v, failed to add to cache", err)
 		}
