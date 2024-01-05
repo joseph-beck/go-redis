@@ -1,6 +1,6 @@
 module github.com/joseph-beck/go-redis
 
-go 1.21.1
+go 1.21
 
 require github.com/joseph-beck/routey v0.0.0-20240104011245-3357c58dca80
 
