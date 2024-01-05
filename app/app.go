@@ -51,7 +51,7 @@ func (a *App) Run() {
 	fmt.Println("loading cache, ", s)
 
 	fmt.Println("starting router")
-	a.Router.Service(services.NewUserService(a.Store))
+	a.Router.Service(services.NewUserService(a.Store, a.Cache))
 	a.Router.Service(services.NewPingService())
 	go a.Router.Shutdown(a.shutdown())
 	a.Router.Run()

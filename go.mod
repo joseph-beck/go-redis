@@ -2,7 +2,7 @@ module github.com/joseph-beck/go-redis
 
 go 1.21
 
-require github.com/joseph-beck/routey v0.0.0-20240105140103-ed459a528374
+require github.com/joseph-beck/routey v0.0.0-20240105145800-857ca691a70a
 
 require (
 	github.com/jinzhu/inflection v1.0.0 // indirect

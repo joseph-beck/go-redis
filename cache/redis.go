@@ -2,8 +2,10 @@ package cache
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/redis/go-redis/v9"
 )
@@ -26,6 +28,7 @@ func New() *Cache {
 
 	return &Cache{
 		Client: c,
+		Config: Config{Lifetime: 1},
 	}
 }
 
@@ -45,10 +48,53 @@ func (c *Cache) Close() error {
 	return err
 }
 
-func (c *Cache) Set() {
+func (c *Cache) Set(i interface{}, k string) (string, error) {
+	ctx := context.Background()
 
+	m, err := json.Marshal(i)
+	if err != nil {
+		return "", err
+	}
+
+	s, err := c.Client.Set(ctx, k, m, time.Duration(c.Config.Lifetime*int(time.Minute))).Result()
+	if err != nil {
+		return "", err
+	}
+
+	return s, nil
 }
 
-func (c *Cache) Get() {
+func (c *Cache) Get(i interface{}, k string) error {
+	ctx := context.Background()
+	r, err := c.Client.Get(ctx, k).Result()
+	if err != nil {
+		return err
+	}
 
+	err = json.Unmarshal([]byte(r), &i)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (c *Cache) Delete(k string) (int, error) {
+	ctx := context.Background()
+	s, err := c.Client.Del(ctx, k).Result()
+	if err != nil {
+		return 0, err
+	}
+
+	return int(s), nil
+}
+
+func (c *Cache) Contains(k string) (bool, error) {
+	ctx := context.Background()
+	e, err := c.Client.Exists(ctx, k).Result()
+	if err != nil {
+		return false, err
+	}
+
+	return e == 1, nil
 }
