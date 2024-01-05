@@ -2,7 +2,13 @@ module github.com/joseph-beck/go-redis
 
 go 1.21
 
-require github.com/joseph-beck/routey v0.0.0-20240104011245-3357c58dca80
+require github.com/joseph-beck/routey v0.0.0-20240105140103-ed459a528374
+
+require (
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
+	github.com/mattn/go-sqlite3 v1.14.19 // indirect
+)
 
 require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
@@ -14,11 +20,13 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.1 // indirect
-	github.com/redis/go-redis/v9 v9.3.1 // indirect
+	github.com/redis/go-redis/v9 v9.3.1
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	gorm.io/driver/sqlite v1.5.4
+	gorm.io/gorm v1.25.5
 )

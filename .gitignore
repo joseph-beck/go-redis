@@ -1,3 +1,6 @@
 build
 
-.env
+MOCK_DATA.json
+
+*.env
+*.sqlite
