@@ -1,3 +1,4 @@
+SWAG ?= swag
 GO ?= go
 GOFMT ?= gofmt "-s"
 GOFILES := $(shell find . -name "*.go")
@@ -12,6 +13,10 @@ build:
 clean:
 	@rm -rf build
 	$(GO) clean
+
+docs:
+	$(SWAG) i --dir ./,\
+	./services/
 
 fmt:
 	$(GOFMT) -w $(GOFILES)

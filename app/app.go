@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/joseph-beck/go-redis/cache"
 	"github.com/joseph-beck/go-redis/database"
+	_ "github.com/joseph-beck/go-redis/docs"
 	"github.com/joseph-beck/go-redis/services"
 	routey "github.com/joseph-beck/routey/pkg/router"
 )
@@ -51,6 +52,7 @@ func (a *App) Run() {
 	fmt.Println("loading cache, ", s)
 
 	fmt.Println("starting router")
+	//a.Router.Docs("/docs/*", swaggy.WrapHandler)
 	a.Router.Service(services.NewUserService(a.Store, a.Cache))
 	a.Router.Service(services.NewPingService())
 	go a.Router.Shutdown(a.shutdown())

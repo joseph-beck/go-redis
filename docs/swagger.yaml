@@ -1,0 +1,10 @@
+basePath: /
+info:
+  contact: {}
+  description: testing out redis caching in golang.
+  license:
+    name: MIT
+  title: go redis
+  version: "1.0"
+paths: {}
+swagger: "2.0"
